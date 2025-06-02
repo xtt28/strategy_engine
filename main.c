@@ -51,18 +51,18 @@ utility_function utility_function_create(payoff_matrix matrix, char wrt) {
   double one_one = matrix.rows[1].values[1].payoffs[offset];
 
   ufunc.xy = zero_zero - zero_one - one_zero + one_one;
-  ufunc.y = zero_one - one_one;
-  ufunc.x = one_zero - one_one;
+  ufunc.y = one_zero - one_one;
+  ufunc.x = zero_one - one_one;
   ufunc.con = one_one;
 
   return ufunc;
 }
 
 int main(void) {
-  payoff_entry zero_zero = { { 4, 7 } };
-  payoff_entry zero_one = { { 2, 10 } };
-  payoff_entry one_zero = { { 0, 20 } };
-  payoff_entry one_one = { { 3, 3 } };
+  payoff_entry zero_zero = { { 15, 10 } };
+  payoff_entry zero_one = { { 5, 5 } };
+  payoff_entry one_zero = { { 0, 5 } };
+  payoff_entry one_one = { { 10, 20 } };
   payoff_matrix_row row_zero = { zero_zero, zero_one };
   payoff_matrix_row row_one = { one_zero, one_one };
   payoff_matrix matrix = { { row_zero, row_one } };
@@ -71,5 +71,5 @@ int main(void) {
   printf("util 1: %.2fxy + %.2fx + %.2fy + %.2f\n", func_x.xy, func_x.x, func_x.y, func_x.con);
   float y = utility_function_findcritical(func_x, 'x');
   float x = utility_function_findcritical(func_y, 'y');
-  printf("x=%.2f,y=%.2f", x, y);
+  printf("x=%.2f,y=%.2f\n", x, y);
 }
