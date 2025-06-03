@@ -21,6 +21,7 @@ creating utility functions from the payoff matrix and taking partial derivatives
   cd strategy_engine
 
   # Compile and run
+  # Note that on some systems you may need to add parameter -std=gnu99
   gcc main.c
   ./a.out
 #+END_SRC

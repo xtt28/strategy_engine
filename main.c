@@ -1,3 +1,5 @@
+#define _GNU_SOURCE // for function asprintf
+
 #include <stdio.h>
 
 struct payoff_entry {
@@ -39,6 +41,10 @@ utility_function utility_function_diff(utility_function util, char wrt) {
 float utility_function_findcritical(utility_function util, char wrt) {
   utility_function diff = utility_function_diff(util, wrt);
   return (-1 * diff.con) / (wrt == 'y' ? diff.x : diff.y);
+}
+
+float utility_function_eval(utility_function util, float x, float y) {
+  return util.xy * x * y + util.x * x + util.y * y + util.con;
 }
 
 utility_function utility_function_create(payoff_matrix matrix, char wrt) {
@@ -84,6 +90,12 @@ int main(void) {
   printf("f_1(x, y) = %s\n", utility_function_tostring(util_x));
   printf("f_2(x, y) = %s\n\n", utility_function_tostring(util_y));
 
-  printf("x = %.2f\n", utility_function_findcritical(util_y, 'y'));
-  printf("y = %.2f\n", utility_function_findcritical(util_x, 'x'));
+  float x = utility_function_findcritical(util_y, 'y');
+  float y = utility_function_findcritical(util_x, 'x');
+  
+  printf("x = %.2f\n", x);
+  printf("y = %.2f\n\n", y);
+
+  printf("f_1(%.2f, %.2f) = %.2f\n", x, y, utility_function_eval(util_x, x, y));
+  printf("f_2(%.2f, %.2f) = %.2f\n", x, y, utility_function_eval(util_y, x, y));  
 }
