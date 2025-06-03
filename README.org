@@ -1,0 +1,33 @@
+#+TITLE: strategy_engine
+#+AUTHOR: xtt28
+
+** Description
+
+strategy_engine is a C program that computes the mixed strategy Nash equilibrium
+for a given payoff matrix. Consider the following table:
+
+| P2 \ P1 | x    | 1-x  |
+| y       | a, b | c, d |
+| 1-y     | e, f | g, h |
+
+Given values for variables a through h, strategy_engine calculates x and y by
+creating utility functions from the payoff matrix and taking partial derivatives.
+
+** Usage
+
+#+BEGIN_SRC shell
+  # Clone from Git
+  git clone https://github.com/xtt28/strategy_engine.git
+  cd strategy_engine
+
+  # Compile and run
+  gcc main.c
+  ./a.out
+#+END_SRC
+
+Enter the cells of the payoff matrix with payoff values in each cell separated by
+one space
+
+** License
+
+GNU GPL v3.0 or later
